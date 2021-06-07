@@ -9,6 +9,7 @@ class Paper{
 
         this.body = Bodies.circle(x, y, radius,options);
         this.radius = radius;
+        this.body = loadImage("MatterJSBoilerPlate-master/paper.png");
         World.add(world, this.body);
     }
 
@@ -17,9 +18,9 @@ class Paper{
         push();
         translate(pos.x, pos.y);
         rotate(this.body.angle);
-        ellipseMode(CENTER);
+        imageMode(CENTER);
         fill(255);
-        ellipse(0,0, this.radius, this.radius);
+        image(0,0, this.radius, this.radius);
         pop();
       }
 }
