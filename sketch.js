@@ -1,60 +1,46 @@
-var rect1, rect2, rect3;
-var ball;
-var world;
-var ground;
-var dustbin, dustbinI;
-var paper, paperI;
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-
-function preload(){
-  
-	
-}
+const Render = Matter.Render;
+var dustbinObj, paperObject,groundObject	
+var world;
 
 function setup() {
-	createCanvas(800, 700);
+	createCanvas(1600, 700);
+	rectMode(CENTER);
 
 	engine = Engine.create();
 	world = engine.world;
-
-	//Create the Bodies Here.
-
-	  rect1 = new Dustbin(400, 650, 200, 20);
-    rect2 = new Dustbin(300, 610, 20, 100);
-    rect3 = new Dustbin(500, 610, 20, 100);
-
-    ball = new Paper(20, 680, 70);
-
-    ground = new Ground(400, 690, 800, 10);
+	
+	paperObject=new paper(200,450,70);
+	groundObject=new ground(width/2,670,width,20);
+	dustbinObj=new dustbin(1200,650);
+	
+	var render = Render.create({
+	  element: document.body,
+	  engine: engine,
+	  options: {
+	    width: 1600,
+	    height: 700,
+	    wireframes: false
+	  }
+	});
 
 	Engine.run(engine);
+	Render.run(render);
   
 }
 
 
 function draw() {
   rectMode(CENTER);
-  background(0);
+  background(230);
+ 
   
-  ball.display();
+  paperObject.display();
+  groundObject.display();
+  dustbinObj.display();
 
-  ground.display();
-
-  rect1.display();
-  rect2.display();
-  rect3.display();
-
-  drawSprites();
 }
-
-function keyPressed(){
-  if (keyCode === UP_ARROW){
-    Matter.Body.applyForce(ball.body, ball.body.position, {x : 13, y : -13});
-  }
-}
-
-
 
